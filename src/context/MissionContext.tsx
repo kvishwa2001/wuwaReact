@@ -1,5 +1,10 @@
-import { createContext, useState, type PropsWithChildren } from "react";
-import { taskData } from "../data/data.tsx";
+import {
+  createContext,
+  useEffect,
+  useState,
+  type PropsWithChildren,
+} from "react";
+import { taskData as Alldata } from "../data/data.tsx";
 interface dataProps {
   id: number;
   task: string;
@@ -8,33 +13,56 @@ interface dataProps {
 }
 interface props {
   points: number;
-  setps: number;
+  steps: number;
   taskData: dataProps[];
+  handleSteps: () => void;
+  handleClaim: (id: number) => void;
   addPoint: (point: number) => void;
 }
 
-const context = createContext<props | null>(null);
+export const Actcontext = createContext<props | null>(null);
 
 const MissionContext = ({ children }: PropsWithChildren) => {
+  const [taskData, setTaskData] = useState(Alldata);
   const [points, SetPoints] = useState<number>(0);
-  const [setps, SetSteps] = useState<number>(0);
+  const [lineWidth, setLineWidth] = useState<number>(0);
+  const [steps, SetSteps] = useState<number>(0);
 
   const addPoint = (newPoint: number) => {
-    points > 200 ? SetPoints(200) : SetPoints(points + newPoint);
+    SetPoints(points + newPoint);
     alert("Point Added");
   };
+  const handleClaim = (item: number) => {
+    setTaskData((prev) => {
+      return prev.map((item1) => {
+        return item1.id == item ? { ...item1, isClaimed: true } : item1;
+      });
+    });
+  };
 
+  const handleSteps = () => {
+    const currentStep = points / 5 / 4;
+    currentStep >= 5 ? SetSteps(5) : SetSteps(currentStep);
+  };
+
+  useEffect(() => {
+    points >= 200 && SetPoints(200);
+    handleSteps();
+    points == 200 && alert("Mission Finished");
+  }, [points]);
   return (
-    <context.Provider
+    <Actcontext.Provider
       value={{
         points,
         addPoint,
-        setps,
+        steps,
         taskData,
+        handleClaim,
+        handleSteps,
       }}
     >
       {children}
-    </context.Provider>
+    </Actcontext.Provider>
   );
 };
 

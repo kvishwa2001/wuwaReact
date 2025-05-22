@@ -14,6 +14,8 @@ html {
 body {
   padding: 2rem 4rem;
   height: 100vh;
+  background: url("../public/bg.png") no-repeat fixed;
+  background-size: cover;
   font-size: 2rem;
 }
 
@@ -23,6 +25,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #ffffff14;
+  backdrop-filter: blur(5px);
+  color: white;
   border: 1px solid red;
 }
 /* status bar styles */
@@ -50,14 +55,15 @@ body {
 .btn {
   outline: none;
   color: white;
-  padding: 0.95rem 1.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   text-align: center;
   /* height: 1rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 1.15rem;
+  /* width: 1.15rem; */
   border-radius: 100rem;
   border: none;
   background: rgba(0, 0, 0, 0.65);
@@ -70,6 +76,7 @@ body {
 
 /* layout styles */
 .main_layout {
+  min-height: 300px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -86,12 +93,153 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1rem;
-  border-right: 1px solid tomato;
+  width: 90px;
   padding-right: 1rem;
   a {
-    color: black;
+    color: white;
+    display: block;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.483);
   }
   & a.active {
-    color: cornflowerblue;
+    border-right: 1px solid tomato;
+    background-color: rgb(0, 0, 0);
+    color: white;
   }
+}
+.activity {
+  width: 100%;
+}
+
+/* activty pts bottom bar */
+
+.steps_holder {
+  border: 1px solid brown;
+  padding: 1rem;
+  display: flex;
+  width: 100%;
+  gap: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  .info {
+    width: 12rem;
+    p {
+      padding-left: 2rem;
+      font-size: 2.5rem;
+    }
+    /* padding: 1rem; */
+    span {
+      opacity: 0.65;
+    }
+  }
+  .steps_meter {
+    flex: 1;
+    flex-shrink: 0;
+    min-width: 999px;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 11rem;
+    position: relative;
+    z-index: 999;
+    .step_line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 0%;
+      height: 3.5px;
+      background: rgb(93, 244, 95);
+      border-radius: 1rem;
+      z-index: 800;
+      /* 16% 36% 56% 76% 96% */
+    }
+    .step {
+      background-color: grey;
+      height: 5rem;
+      width: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1999;
+      color: black;
+      border-radius: 100rem;
+      border: 3px solid rgba(21, 0, 24, 0.336);
+    }
+    .step.active {
+      background-color: black;
+    }
+  }
+}
+
+/* task items*/
+main {
+  max-height: 300px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 2.5rem;
+}
+.task {
+  border-radius: 0.15rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1.65rem;
+  background: rgb(232 229 229 / 16%);
+  border: 1px solid rgba(0, 0, 0, 0.498);
+
+  &.Claimed {
+    cursor: default;
+    background: green;
+    color: white;
+    order: 999;
+  }
+  .task_left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    min-height: 30px;
+  }
+  .taskAction {
+    span {
+      padding: 1rem;
+      border-radius: 1rem;
+      color: black;
+    }
+    button {
+      outline: none;
+      border: none;
+      padding: 1rem;
+      width: 8rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      font-size: 1.6rem;
+      background: black;
+      color: white;
+      transition: all 0.15s ease-in-out;
+      &:hover {
+        opacity: 0.8;
+        scale: 0.88;
+      }
+    }
+  }
+}
+
+.task:has(.taskAction span) {
+  cursor: default;
+  opacity: 0.75;
+  background: grey;
+}
+
+.step.activated {
+  background-color: rgb(0, 153, 255) !important;
+  color: white !important;
+  border: 3px solid rgb(44, 44, 44) !important;
 }

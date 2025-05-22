@@ -4,6 +4,7 @@ import One from "./pages/One";
 import Two from "./pages/Two";
 import Three from "./pages/Three";
 import Four from "./pages/Four";
+import MissionContext from "./context/MissionContext";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -32,7 +33,9 @@ const App = () => {
   ]);
   return (
     <>
-      <RouterProvider router={router} />
+      <MissionContext>
+        <RouterProvider router={router} />
+      </MissionContext>
     </>
   );
 };
