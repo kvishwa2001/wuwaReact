@@ -1,0 +1,97 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: sans-serif;
+}
+
+body {
+  padding: 2rem 4rem;
+  height: 100vh;
+  font-size: 2rem;
+}
+
+/* main container */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+}
+/* status bar styles */
+.statusbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+
+  .right,
+  .left {
+    width: 100px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+  .left {
+    width: 100%;
+    gap: 2.5rem;
+    justify-content: flex-start;
+  }
+}
+/* common btn */
+.btn {
+  outline: none;
+  color: white;
+  padding: 0.95rem 1.5rem;
+  text-align: center;
+  /* height: 1rem; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1.15rem;
+  border-radius: 100rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.65);
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+/* layout styles */
+.main_layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  min-height: 200px;
+  border: 1px solid blue;
+  padding: 2rem;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  border-right: 1px solid tomato;
+  padding-right: 1rem;
+  a {
+    color: black;
+  }
+  & a.active {
+    color: cornflowerblue;
+  }
+}
